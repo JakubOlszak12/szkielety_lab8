@@ -1,5 +1,6 @@
 import styles from "./styles.module.css"
 import { useState } from "react"
+import  Users  from "./Users"
 import axios from "axios"
 const Main = () => {
     const [dane,ustawDane] = useState([])
@@ -27,6 +28,7 @@ const Main = () => {
         //ustaw dane w komponencie za pomocą hooka useState na listę z danymi przesłanymi
         //z serwera – jeśli został poprawnie zweryfikowany token
         ustawDane(res.data)
+        {dane.length>0 ? <Users users={dane} /> : <p></p>}
         console.log(dane) // `res.data` - zawiera sparsowane ciało odpowiedzi (response body)
         } catch (error) {
         if (error.response && error.response.status >= 400 &&error.response.status <= 500)
@@ -49,6 +51,9 @@ const Main = () => {
                     Użytkownicy
                 </button>
             </nav>
+            <div>
+            {dane.length>0 ? <Users users={dane} /> : <p></p>}
+            </div>
         </div>
     )
 }
